@@ -1,0 +1,42 @@
+language: python
+sudo: false
+python:
+  - "2.7"
+  - "3.6"
+  - "3.7"
+  # - "3.3"
+  # - "3.4"
+  # - "3.5"
+  # - "pypy"
+  # - "pypy-5.3.1"
+
+
+matrix:
+    allow_failures:
+        - python: 2.7
+
+# services:
+#   - mysql
+
+# before_install:
+#   - mysql -e 'CREATE DATABASE jj_httpbin;'
+
+# command to install dependencies
+install:
+  - python setup.py build sdist
+  - pip install -r development.txt
+
+# command to run tests
+script: nosetests tests/unit tests/functional
+
+# # uncomment the lines below to enable automated pypi releases (continuous delivery)
+# # Learn more here: https://docs.travis-ci.com/user/encryption-keys/
+# deploy:
+#   provider: pypi
+#   user: jjanczyszyn
+#   password:
+#     secure: your-encrypted-travis-password
+#   on:
+#     branch: master
+#     tags: true
+#   distributions: sdist bdist_wheel
